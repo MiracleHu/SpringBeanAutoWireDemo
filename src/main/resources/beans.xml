@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!-- id 和 name 都可以，id更常用 -->
+	<bean name="userDAO" class="com.huanle.dao.impl.UserDAOImpl">
+		<property name="daoId" value="1"></property>
+	</bean>
+
+	<bean id="userDAO2" class="com.huanle.dao.impl.UserDAOImpl">
+		<property name="daoId" value="2"></property>
+	</bean>
+
+<!-- 省去property装配，用autowire属性就可以让bean自动装配userDAO到底是哪个实现 -->
+	<bean id="userService" class="com.huanle.service.UserService"
+		scope="prototype" autowire="byName">
+		<!-- 
+  		<property name="userDAO" ref="userDAO2" />
+  	 	-->
+	</bean>
+
+</beans>
